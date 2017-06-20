@@ -24,7 +24,7 @@
 }
 #inputForm {
     margin-left: 136px;
-    margin-top: 75px;
+    margin-top: 25px;
     width: 264px;
     border-spacing: 0px;
     border-collapse: separate;
@@ -35,7 +35,7 @@
 #divTitle {
     font-family:'Times New Roman';
     margin-top:auto;
-    padding-bottom: 11px;
+    padding-bottom: 0px;
     text-align: center;
     font-size: 25px;
     color: #12499C;

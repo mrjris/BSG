@@ -45,12 +45,14 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <p class="has-error">
-                            <asp:Label ID="lblError" runat="server"></asp:Label>
+                            <asp:Label ID="lblError" ForeColor="Red" runat="server"></asp:Label>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BSGConnectionString %>" OnSelecting="SqlDataSource1_Selecting" SelectCommand="SELECT [ID], [Account], [Description], [CreatedPerson] FROM [Account]"></asp:SqlDataSource>
 
 </asp:Content>

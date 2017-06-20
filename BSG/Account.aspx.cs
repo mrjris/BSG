@@ -13,5 +13,10 @@ namespace BSG
         {
 
         }
+
+        protected void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

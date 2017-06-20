@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Data.SqlClient;
+using System.Web.Configuration;
+using System.Data;
 
 namespace BSG
 {
@@ -30,9 +32,38 @@ namespace BSG
         }
         private bool check(string acc, string pass)
         {
-            SqlConnection cnn = new SqlConnection();
+            pass = MD5.Encode(pass);
+            SqlConnection cnn = new SqlConnection(WebConfigurationManager.ConnectionStrings["BSGConnectionString"].ConnectionString);
+            cnn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("GetAccounts", cnn);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@acc", acc);
+                cmd.Parameters.Add("@pass", pass);
+
+                int count = (int)cmd.ExecuteScalar();
+                if (count == 1) return true;
+                else return false;
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                if (cnn != null) cnn.Close();
+            }
 
             return false;
+        }
+
+        protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+
         }
     }
 }
