@@ -1,0 +1,62 @@
+﻿body {
+    width: 100%;
+    background: url(../Images/bg.PNG) repeat;
+
+    margin: 0;
+}
+#content{
+    width: 1072px;
+    margin: 100px auto;
+}
+
+#content .left{
+    float:left;
+    width: 532px;
+    height: 333px;
+    background:url(../Images/img.PNG) no-repeat;
+}
+#content .right{
+    float:left;
+    width: 532px;
+    height: 333px;
+    /*background:url(../Images/img2.PNG) repeat;*/
+    background-color:lightsteelblue; 
+}
+#inputForm {
+    margin-left: 136px;
+    margin-top: 75px;
+    width: 264px;
+    border-spacing: 0px;
+    border-collapse: separate;
+    font-family: 'Palatino Linotype';
+    font-size: 14px;
+    border: 0;
+}
+#divTitle {
+    font-family:'Times New Roman';
+    margin-top:auto;
+    padding-bottom: 11px;
+    text-align: center;
+    font-size: 25px;
+    color: #12499C;
+}
+
+.row {
+    padding-bottom: 7px;
+    padding-top: 8px;
+}
+
+
+.btn-right{
+    float:right;
+}
+
+.btn-left{
+    float:left;
+}
+
+#chkRememberLogin{
+    border-collapse: separate;
+    font-family: roboto;
+    font-size: 14px;
+}
