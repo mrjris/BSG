@@ -1,9 +1,19 @@
 ﻿body {
     width: 100%;
     background: url(../Images/bg.PNG) repeat;
-
+     padding-top: 50px;
+    padding-bottom: 20px;
     margin: 0;
 }
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
 #content{
     width: 1072px;
     margin: 100px auto;
