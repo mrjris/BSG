@@ -62,6 +62,7 @@
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/Account">Account</a></li>
                         <li><a runat="server" href="~/Contact">Sim</a></li>
+                        <li><a runat="server" href="~/Group">Group</a></li>
                     </ul>
                 </div>
             </div>
