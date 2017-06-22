@@ -133,12 +133,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Avatar\" />
+    <Folder Include="Images\DateTime\" />
+    <Folder Include="Images\demo\" />
+    <Folder Include="Images\flash\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Account.aspx" />
     <Content Include="AddAccount.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\BkavCSS.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\myCSS.css" />
@@ -152,8 +157,56 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\bg.PNG" />
+    <Content Include="Images\BTW-logo.png" />
+    <Content Include="Images\close_icon.png" />
+    <Content Include="Images\collapsed.png" />
+    <Content Include="Images\dropdown-list.png" />
+    <Content Include="Images\expanded.png" />
+    <Content Include="Images\icon\asc.gif" />
+    <Content Include="Images\icon\bg.gif" />
+    <Content Include="Images\icon\collapsed.png" />
+    <Content Include="Images\icon\Del-Filter.png" />
+    <Content Include="Images\icon\desc.gif" />
+    <Content Include="Images\icon\help.png" />
+    <Content Include="Images\icon\icon-add.png" />
+    <Content Include="Images\icon\icon-addCustomer.png" />
+    <Content Include="Images\icon\icon-bullet.png" />
+    <Content Include="Images\icon\icon-cancel.png" />
+    <Content Include="Images\icon\icon-delete.png" />
+    <Content Include="Images\icon\icon-detail.png" />
+    <Content Include="Images\icon\icon-dowload.png" />
+    <Content Include="Images\icon\icon-edit.png" />
+    <Content Include="Images\icon\icon-history.png" />
+    <Content Include="Images\icon\icon-home.png" />
+    <Content Include="Images\icon\icon-info.png" />
+    <Content Include="Images\icon\icon-mac.png" />
+    <Content Include="Images\icon\icon-print.png" />
+    <Content Include="Images\icon\icon-refresh.png" />
+    <Content Include="Images\icon\icon-report.png" />
+    <Content Include="Images\icon\icon-tick.png" />
+    <Content Include="Images\icon\icon-upfile.png" />
+    <Content Include="Images\icon\icon-userOffline.png" />
+    <Content Include="Images\icon\icon-userOnline.png" />
+    <Content Include="Images\icon\icon-warning.png" />
+    <Content Include="Images\icon\icon_16.png" />
+    <Content Include="Images\icon\icon_17_bottom.png" />
+    <Content Include="Images\icon\icon_17_left.png" />
+    <Content Include="Images\icon\icon_17_right.png" />
+    <Content Include="Images\icon\icon_17_top.png" />
+    <Content Include="Images\icon\icon_23.png" />
+    <Content Include="Images\icon\icon_28.png" />
+    <Content Include="Images\icon\icon_8.png" />
+    <Content Include="Images\icon\icon_9.png" />
+    <Content Include="Images\icon\icon_ProccesReport.png" />
+    <Content Include="Images\icon\icon_setting.png" />
+    <Content Include="Images\icon\icon_view.png" />
+    <Content Include="Images\icon\icon_why.png" />
+    <Content Include="Images\icon\QLHS_butchi.png" />
+    <Content Include="Images\icon\search.png" />
+    <Content Include="Images\icon\style.css" />
     <Content Include="Images\img.PNG" />
     <Content Include="Images\img2.PNG" />
+    <Content Include="Images\LogoCCS.png" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />

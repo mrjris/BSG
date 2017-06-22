@@ -14,6 +14,10 @@ namespace BSG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+
+            }
             dgvAccount.DataBind();
         }
 
@@ -33,16 +37,17 @@ namespace BSG
 
         private void Add_Phone()
         {
+            if (!validatePhones()) return;
             cnn.Open();
             //Lấy ID của tài khoản vừa mới thêm
             SqlCommand cmd = new SqlCommand("GetAccountID", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@account", txtAccount.Text.Trim());
             int id = (int)cmd.ExecuteScalar();
             cmd.Parameters.AddWithValue("@id", id);
             //Xong lấy ID
             
             //Thêm số điện thoại vào bảng Account_Phone (nếu có)
-            if (!validatePhones()) return;
             cmd.CommandText = "AddPhone";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Clear();
@@ -98,8 +103,8 @@ namespace BSG
         {
             
             string phones = txtPhones.Text.Trim();
-            char[] dim = { ' ', ';' };
-            phone = phones.Split(dim);
+            string[] dim = { " ", " ","\r\n"};
+            phone = phones.Split(dim,StringSplitOptions.RemoveEmptyEntries);
 
             if (phone.Length < 1) return false;
 
@@ -107,6 +112,37 @@ namespace BSG
                 if (sphone.Length < 9 || sphone.Length > 16) return false;
 
             return true;
+        }
+
+        protected void txtAccount_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (args.Value.Length > 20)
+                args.IsValid = false;
+            else args.IsValid = true;
+        }
+
+        protected void txtPassword_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (args.Value.Length > 10)
+                args.IsValid = false;
+            else args.IsValid = true;
+        }
+
+        protected void txtPhones_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (!validatePhones())
+                args.IsValid = false;
+            else args.IsValid = true;
+        }
+        protected void Delete_Click(object sender, CommandEventArgs e)
+        {
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand("DeleteAccountByID", cnn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            int id = Convert.ToInt32(e.CommandArgument.ToString());
+            //cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cnn.Close();
         }
     }
 }
