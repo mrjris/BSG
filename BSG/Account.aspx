@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="BSG.Account" MasterPageFile="~/Site.Master" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="BSG.Account" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <div class="body" style="padding-top:50px;">
+    <div class="body" style="padding-top: 50px;">
         <div class="col-md-10 col-md-offset-1">
             <div class="row">
                 <button type="button" class="btn btn-primary btn-default-bkav" data-toggle="modal" data-target="#addModal" data-insert="true">Thêm</button>
@@ -51,9 +51,7 @@
                             </div>
                             <div class="modal-footer">
                                 <asp:Button CssClass="btn btn-primary" Text="Cập nhật" ID="Add" OnClick="Add_Click" runat="server" />
-                                <button type="button" class="btn btn-primary"
-                                    data-dismiss="modal">
-                                    Close</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Bỏ qua</button>
                             </div>
                         </div>
                     </div>
@@ -62,60 +60,38 @@
             <div class="row">
                 <asp:GridView ID="dgvAccount" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataKeyNames="ID" CssClass="table table-bordered table-bkav-w" BackColor="White">
                     <Columns>
+                        <%-- <asp:TemplateField>
+                            
+                            <ItemTemplate>
+                                <a href="#addModal" id="edit" data-toggle="modal" 
+                                    data-account="<%# Eval("Account") %>" data-insert="false"></a>
+                                &nbsp;<asp:ImageButton ID="Delete" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/icon/icon-delete.png" Text="Delete" />
+                            </ItemTemplate>
+                        </asp:TemplateField>--%>
+
                         <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" InsertVisible="False" ReadOnly="True" Visible="False"></asp:BoundField>
                         <asp:BoundField DataField="Account" HeaderText="Account" SortExpression="Account"></asp:BoundField>
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description"></asp:BoundField>
                         <asp:BoundField DataField="Phones" HeaderText="Phones" SortExpression="Phones" ReadOnly="True"></asp:BoundField>
                         <asp:BoundField DataField="CreatedPerson" HeaderText="CreatedPerson" SortExpression="CreatedPerson" />
-                        <%--<asp:TemplateField HeaderText="Chức năng">
+                        <asp:TemplateField HeaderText="Chức năng">
                             <ItemTemplate>
-                                <button type="button" id="edit" data-toggle="modal" data-target="#addModal"
+                                <div  id="edit" data-toggle="modal" data-target="#addModal"
                                     data-account="<%# Eval("Account") %>" data-insert="false">
                                     <asp:ImageButton ImageUrl="~/Images/icon/icon-edit.png" runat="server" />
-                                </button>
-                                <button type="button" id="delete" >
-                                    <asp:ImageButton ID="Detele" ImageUrl="~/Images/icon/icon-delete.png"  runat="server" OnClick="Delete_Click"  />
-                                    
-                                </button>
-                                
-                            </ItemTemplate>
-                        </asp:TemplateField>--%>
-
-
-                        <asp:TemplateField>
-                            
-                            <ItemTemplate>
-                                <asp:ImageButton ID="Edit" runat="server" 
-                                    CausesValidation="False" CommandName="Edit" 
-                                    ImageUrl="~/Images/icon/icon-edit.png" Text="Edit"  
-                                    data-toggle="modal"
-                                    data-target="@addModal"
-                                    data-insert="false"
-                                    
-                                    />
-                                &nbsp;<asp:ImageButton ID="Delete" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/icon/icon-delete.png" Text="Delete" />
+                                </div>
                             </ItemTemplate>
                         </asp:TemplateField>
-
-
-                        <asp:TemplateField ShowHeader="False">
-                            <EditItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
-                                &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
-                                &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-
-
+                        
+                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/Images/icon/icon-delete.png" ShowDeleteButton="True" />
+                        
                     </Columns>
                 </asp:GridView>
-                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:BSGConnectionString %>' SelectCommand="GetAllAccount" SelectCommandType="StoredProcedure"
-                    DeleteCommand="DeleteAccountByID" DeleteCommandType="StoredProcedure">
+                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:BSGConnectionString %>' 
+                    DeleteCommand="DeleteAccountByID" DeleteCommandType="StoredProcedure"
+                    SelectCommand="GetAllAccount" SelectCommandType="StoredProcedure">
                     <DeleteParameters>
-                        <asp:Parameter Name="@id" Type="Int32" />
+                        <asp:Parameter Name="id" Type="Int32"  />
                     </DeleteParameters>
                 </asp:SqlDataSource>
             </div>
@@ -131,7 +107,7 @@
             var modal = $(this)
             modal.find('.modal-body  #MainContent_isAdd').val(insert)
             modal.find('.modal-body  #MainContent_txtAccount').val(recipient)
-            
+
         })
     </script>
 </asp:Content>

@@ -16,9 +16,13 @@ namespace BSG
         {
             if(!IsPostBack)
             {
-
+                dgvAccount.DataBind();
             }
-            dgvAccount.DataBind();
+            else
+            {
+                dgvAccount.DataBind();
+            }
+            
         }
 
         protected void btnAddAccount_Click(object sender, EventArgs e)
@@ -134,15 +138,36 @@ namespace BSG
                 args.IsValid = false;
             else args.IsValid = true;
         }
-        protected void Delete_Click(object sender, CommandEventArgs e)
+
+        protected void btnDetele_Click(object sender, ImageClickEventArgs e)
         {
             cnn.Open();
             SqlCommand cmd = new SqlCommand("DeleteAccountByID", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            int id = Convert.ToInt32(e.CommandArgument.ToString());
-            //cmd.ExecuteNonQuery();
+            Button btnDelete = (Button)sender;
+            int id = Convert.ToInt32(btnDelete.CommandArgument.ToString());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
             cmd.Dispose();
             cnn.Close();
+        }
+
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand("DeleteAccountByID", cnn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            Button btnDelete = (Button)sender;
+            int id = Convert.ToInt32(btnDelete.CommandArgument.ToString());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cnn.Close();
+        }
+
+        protected void DeleteAccount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -41,8 +41,8 @@ namespace BSG
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("@acc", acc);
-                cmd.Parameters.Add("@pass", pass);
+                cmd.Parameters.AddWithValue("@acc", acc);
+                cmd.Parameters.AddWithValue("@pass", pass);
 
                 int count = (int)cmd.ExecuteScalar();
                 if (count == 1) return true;
