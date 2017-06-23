@@ -306,6 +306,7 @@
     <Content Include="SendSMS.aspx" />
     <Content Include="Sim.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="Thongke.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -405,6 +406,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Thongke.aspx.cs">
+      <DependentUpon>Thongke.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Thongke.aspx.designer.cs">
+      <DependentUpon>Thongke.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
