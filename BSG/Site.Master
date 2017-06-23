@@ -26,6 +26,7 @@
                 <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
                 <asp:ScriptReference Name="bootstrap" />
                 <asp:ScriptReference Name="respond" />
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
@@ -49,10 +50,10 @@
                             <asp:Image CssClass="imgLogo" ImageUrl="~/Images/BTW-logo.png" runat="server" />
                         </a>
                         <asp:LoginView runat="server">
-                            <AnonymousTemplate> </AnonymousTemplate>
+                            <AnonymousTemplate></AnonymousTemplate>
                             <LoggedInTemplate>
-                                <asp:LoginStatus CssClass="pull-right" runat="server" LogoutText="Thoát" LogoutAction="Redirect" 
-                                    LoginText="Đăng nhập"  />  
+                                <asp:LoginStatus CssClass="pull-right" runat="server" LogoutText="Thoát" LogoutAction="Redirect"
+                                    LoginText="Đăng nhập" />
                             </LoggedInTemplate>
                         </asp:LoginView>
                     </div>
@@ -67,9 +68,9 @@
                 </div>
             </div>
         </div>
-        <div class="body" style="padding-top:50px;">
+        <div class="body" style="padding-top: 50px;">
             <div class="divBkav-body">
-                <asp:ContentPlaceHolder  ID="MainContent" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
 
             </div>
