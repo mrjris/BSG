@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="body" style="padding-top: 50px;">
-            <div class="divBkav-body">
+            <div class="divBkav-body" style="padding-top:20px; ">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
 
