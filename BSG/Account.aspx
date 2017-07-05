@@ -1,74 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="BSG.Account" MasterPageFile="~/Site.Master"  %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="BSG.Account" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="body" style="padding-top: 50px;">
         <div class="col-md-10 col-md-offset-1">
             <div class="row">
-                <button type="button" class="btn btn-primary btn-default-bkav" data-toggle="modal" data-target="#addModal" data-insert="true">Thêm</button>
-
-                <div class="modal fade" tabindex="-1" id="addModal"
-                    data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    &times;
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-horizontal">
-                                    <asp:TextBox Visible="true" ID="isAdd" runat="server" />
-                                    <div class="form-group">
-                                        <label for="txtAccont" class="col-sm-4 control-label">Account</label>
-                                        <div class="col-sm-8">
-                                            <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtAccount" placeholder="Nhập tên đăng nhập" />
-                                            <asp:RequiredFieldValidator ForeColor="Red" ErrorMessage="Tên đăng nhập không được để trống" ControlToValidate="txtAccount" runat="server" />
-                                            <asp:CustomValidator OnServerValidate="txtAccount_ServerValidate" ErrorMessage="Tên đăng nhập không được quá 20 ký tự." ControlToValidate="txtAccount" runat="server" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPassword" class="col-sm-4 control-label">Password</label>
-                                        <div class="col-sm-8">
-                                            <asp:TextBox runat="server" TextMode="Password" Width="100%" CssClass="form-control" ID="txtPassword" placeholder="Nhập mật khẩu" />
-                                            <asp:RequiredFieldValidator ErrorMessage="Mật khẩu không được để trống" ControlToValidate="txtPassword" runat="server" />
-                                            <asp:CustomValidator OnServerValidate="txtPassword_ServerValidate" ErrorMessage="Mật khẩu không được quá 10 ký tự." ControlToValidate="txtPassword" runat="server" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtDescription" class="col-sm-4 control-label">Mô tả</label>
-                                        <div class="col-sm-8">
-                                            <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtDescription" placeholder="Nhập mô tả" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPhones" class="col-sm-4 control-label">Số điện thoại</label>
-                                        <div class="col-sm-8">
-                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" TextMode="MultiLine" Rows="7" ID="txtPhones" placeholder="Nhập số điện thoại, mỗi dòng một số điện thoại." />
-                                            <asp:CustomValidator OnServerValidate="txtPhones_ServerValidate" ErrorMessage="Số điện thoại không được nhập quá 16 ký tự." ControlToValidate="txtPhones" runat="server" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <asp:Button CssClass="btn btn-primary" Text="Cập nhật" ID="Add" OnClick="Add_Click" runat="server" />
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Bỏ qua</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <asp:Button ID="btnAdd" OnClick="btnAdd_Click" Text="Thêm" CssClass="btn btn-primary btn-default-bkav" data-toggle="modal" data-target="#addModal" runat="server" />
             </div>
             <div class="row">
                 <asp:GridView ID="dgvAccount" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataKeyNames="ID" CssClass="table table-bordered table-bkav-w" BackColor="White">
                     <Columns>
-                        <%-- <asp:TemplateField>
-                            
-                            <ItemTemplate>
-                                <a href="#addModal" id="edit" data-toggle="modal" 
-                                    data-account="<%# Eval("Account") %>" data-insert="false"></a>
-                                &nbsp;<asp:ImageButton ID="Delete" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/icon/icon-delete.png" Text="Delete" />
-                            </ItemTemplate>
-                        </asp:TemplateField>--%>
-
                         <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" InsertVisible="False" ReadOnly="True" Visible="False"></asp:BoundField>
                         <asp:BoundField DataField="Account" HeaderText="Account" SortExpression="Account"></asp:BoundField>
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description"></asp:BoundField>
@@ -76,24 +16,74 @@
                         <asp:BoundField DataField="CreatedPerson" HeaderText="CreatedPerson" SortExpression="CreatedPerson" />
                         <asp:TemplateField HeaderText="Chức năng">
                             <ItemTemplate>
-                                <div  id="edit" data-toggle="modal" data-target="#addModal"
-                                    data-account="<%# Eval("Account") %>" data-insert="false">
-                                    <asp:ImageButton ImageUrl="~/Images/icon/icon-edit.png" runat="server" />
+                                <div id="edit" data-toggle="modal" data-target="#addModal"
+                                    data-account="<%# Eval("Account") %>">
+                                    <asp:ImageButton ID="btnEdit" ImageUrl="~/Images/icon/icon-edit.png" runat="server" OnClick="btnEdit_Click" />
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        
+
                         <asp:CommandField ButtonType="Image" DeleteImageUrl="~/Images/icon/icon-delete.png" ShowDeleteButton="True" />
-                        
+
                     </Columns>
                 </asp:GridView>
-                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:BSGConnectionString %>' 
+                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:BSGConnectionString %>'
                     DeleteCommand="DeleteAccountByID" DeleteCommandType="StoredProcedure"
                     SelectCommand="GetAllAccount" SelectCommandType="StoredProcedure">
                     <DeleteParameters>
-                        <asp:Parameter Name="id" Type="Int32"  />
+                        <asp:Parameter Name="id" Type="Int32" />
                     </DeleteParameters>
                 </asp:SqlDataSource>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="addModal"
+        data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <asp:TextBox Visible="true" ID="isAdd" runat="server" />
+                        <div class="form-group">
+                            <label for="txtAccont" class="col-sm-4 control-label">Account</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtAccount" placeholder="Nhập tên đăng nhập" />
+                                <asp:RequiredFieldValidator ForeColor="Red" ErrorMessage="Tên đăng nhập không được để trống" ControlToValidate="txtAccount" runat="server" />
+                                <asp:CustomValidator OnServerValidate="txtAccount_ServerValidate" ErrorMessage="Tên đăng nhập không được quá 20 ký tự." ControlToValidate="txtAccount" runat="server" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPassword" class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" TextMode="Password" Width="100%" CssClass="form-control" ID="txtPassword" placeholder="Nhập mật khẩu" />
+                                <asp:RequiredFieldValidator ErrorMessage="Mật khẩu không được để trống" ControlToValidate="txtPassword" runat="server" />
+                                <asp:CustomValidator OnServerValidate="txtPassword_ServerValidate" ErrorMessage="Mật khẩu không được quá 10 ký tự." ControlToValidate="txtPassword" runat="server" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDescription" class="col-sm-4 control-label">Mô tả</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtDescription" placeholder="Nhập mô tả" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPhones" class="col-sm-4 control-label">Số điện thoại</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" CssClass="form-control" Width="100%" TextMode="MultiLine" Rows="7" ID="txtPhones" placeholder="Nhập số điện thoại, mỗi dòng một số điện thoại." />
+                                <asp:CustomValidator OnServerValidate="txtPhones_ServerValidate" ErrorMessage="Số điện thoại không được nhập quá 16 ký tự." ControlToValidate="txtPhones" runat="server" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button CssClass="btn btn-primary" Text="Cập nhật" ID="Add" OnClick="Add_Click" runat="server" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Bỏ qua</button>
+                </div>
             </div>
         </div>
     </div>
@@ -109,5 +99,7 @@
             modal.find('.modal-body  #MainContent_txtAccount').val(recipient)
 
         })
+
+
     </script>
 </asp:Content>

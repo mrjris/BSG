@@ -13,5 +13,20 @@ namespace BSG
         {
 
         }
+
+        protected void Unnamed2_SelectionChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void FromDateCalendar_SelectionChanged(object sender, EventArgs e)
+        {
+            txtFromDate.Text = FromDateCalendar.SelectedDate.ToShortDateString();
+        }
+
+        protected void ToDateCaledar_SelectionChanged(object sender, EventArgs e)
+        {
+            txtToDate.Text = ToDateCaledar.SelectedDate.ToShortDateString();
+        }
     }
 }

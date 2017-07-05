@@ -14,7 +14,9 @@ namespace BSG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+            }
         }
 
         protected void ddlGroupCode_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,6 +43,58 @@ namespace BSG
             else args.IsValid = true;
             cmd.Dispose();
             cnn.Close();
+        }
+
+            
+
+        protected void gdvGroups_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int rowIndex = 0;
+            int id;
+            GridViewRow row;
+            GridView grid = sender as GridView;
+            try
+            {
+                rowIndex = Convert.ToInt32(e.CommandArgument); // Get the current row
+                row = grid.Rows[rowIndex];
+                txtGroupID.Text = rowIndex.ToString();
+            }
+            catch
+            {
+
+            }
+
+            switch (e.CommandName)
+            {
+                case "myDelete":
+                    cnn.Open();
+                    SqlCommand cmd = cnn.CreateCommand();
+                    cmd.CommandText = "DELETE FROM [Group] WHERE GroupId= @groupId";
+                    cmd.Parameters.AddWithValue("@groupId", rowIndex);
+                    cmd.ExecuteNonQuery();
+                    gdvGroups.DataBind();
+                    cnn.Close();
+                    break;
+                default:
+                    break;
+            }
+
+            
+        }
+
+        protected void AddGroup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void EditGroup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Search_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

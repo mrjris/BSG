@@ -33,15 +33,15 @@ namespace BSG
         protected void Add_Click(object sender, EventArgs e)
         {
             if (!IsValid) return;
-
             if (isAdd.Text == "true") Add_Account();
             else Update_Account();
-            Add_Phone();
+            Add_Phone(txtPhones.Text.Trim());
+            dgvAccount.DataBind();
         }
 
-        private void Add_Phone()
+        private void Add_Phone(string phones)
         {
-            if (!validatePhones()) return;
+            if (!validatePhones(phones)) return;
             cnn.Open();
             //Lấy ID của tài khoản vừa mới thêm
             SqlCommand cmd = new SqlCommand("GetAccountID", cnn);
@@ -103,10 +103,8 @@ namespace BSG
         }
 
         private string[] phone;
-        private bool validatePhones()
+        private bool validatePhones(string phones)
         {
-            
-            string phones = txtPhones.Text.Trim();
             string[] dim = { " ", " ","\r\n"};
             phone = phones.Split(dim,StringSplitOptions.RemoveEmptyEntries);
 
@@ -134,7 +132,7 @@ namespace BSG
 
         protected void txtPhones_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (!validatePhones())
+            if (!validatePhones(args.Value.Trim()))
                 args.IsValid = false;
             else args.IsValid = true;
         }
@@ -168,6 +166,24 @@ namespace BSG
         protected void DeleteAccount_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Edit_Click(object sender, EventArgs e)
+        {
+            if (!IsValid) return;
+            Update_Account();
+            Add_Phone(txtPhones.Text.Trim());
+            dgvAccount.DataBind();
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            isAdd.Text = "true";
+        }
+
+        protected void btnEdit_Click(object sender, ImageClickEventArgs e)
+        {
+            isAdd.Text = "false";
         }
     }
 }

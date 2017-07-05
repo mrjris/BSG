@@ -202,8 +202,10 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Group.aspx" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="Images\bg.PNG" />
     <Content Include="Images\BTW-logo.png" />
+    <Content Include="Images\Calendar.png" />
     <Content Include="Images\close_icon.png" />
     <Content Include="Images\collapsed.png" />
     <Content Include="Images\dropdown-list.png" />
@@ -306,6 +308,7 @@
     <Content Include="SendSMS.aspx" />
     <Content Include="Sim.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="Test.aspx" />
     <Content Include="Thongke.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -406,6 +409,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Thongke.aspx.cs">
       <DependentUpon>Thongke.aspx</DependentUpon>
