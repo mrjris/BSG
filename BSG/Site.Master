@@ -46,8 +46,8 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-fixed-top">
-            <div class="  with-nav-tabs  tab-bkav-primary">
+        <div class="body" style="padding-top: 50px;">
+            <div class="navbar navbar-fixed-top">
                 <div class="divHeader">
                     <div class="divImgHeader">
                         <a runat="server" href="~/">
@@ -62,20 +62,21 @@
                         </asp:LoginView>
                     </div>
                 </div>
-                <div class="tab-bkav">
-                    <ul class="nav nav-tabs">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Account">Account</a></li>
-                        <li><a runat="server" href="~/Sim">Sim</a></li>
-                        <li><a runat="server" href="~/Group">Group</a></li>
-                        <li><a runat="server" href="~/ThongKe">Thống kê</a></li>
-                    </ul>
+                <div class="  with-nav-tabs  tab-bkav-primary">
+                    <div class="tab-bkav">
+                        <ul class="nav nav-tabs">
+                            <li><a runat="server" href="~/">Home</a></li>
+                            <li><a runat="server" href="~/Account">Account</a></li>
+                            <li><a runat="server" href="~/Sim">Sim</a></li>
+                            <li><a runat="server" href="~/Group">Group</a></li>
+                            <li><a runat="server" href="~/ThongKe">Thống kê</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="body" style="padding-top: 50px;">
-            <div class="divBkav-body" style="padding-top: 20px;">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            <div class="divBkav-body">
+
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" >
                 </asp:ContentPlaceHolder>
 
             </div>

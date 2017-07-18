@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSG", "BSG\BSG.csproj", "{E320FE75-3BB6-414F-9AFE-E71405C0E7B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSG2", "BSG2\BSG2.csproj", "{190A262F-54CB-42CD-9EB8-C1C30FC64576}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E320FE75-3BB6-414F-9AFE-E71405C0E7B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E320FE75-3BB6-414F-9AFE-E71405C0E7B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E320FE75-3BB6-414F-9AFE-E71405C0E7B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190A262F-54CB-42CD-9EB8-C1C30FC64576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190A262F-54CB-42CD-9EB8-C1C30FC64576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190A262F-54CB-42CD-9EB8-C1C30FC64576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190A262F-54CB-42CD-9EB8-C1C30FC64576}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

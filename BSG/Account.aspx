@@ -1,105 +1,197 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="BSG.Account" MasterPageFile="~/Site.Master" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="BSG.Account" %>
 
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <div class="body" style="padding-top: 50px;">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="row">
-                <asp:Button ID="btnAdd" OnClick="btnAdd_Click" Text="Thêm" CssClass="btn btn-primary btn-default-bkav" data-toggle="modal" data-target="#addModal" runat="server" />
-            </div>
-            <div class="row">
-                <asp:GridView ID="dgvAccount" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataKeyNames="ID" CssClass="table table-bordered table-bkav-w" BackColor="White">
-                    <Columns>
-                        <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" InsertVisible="False" ReadOnly="True" Visible="False"></asp:BoundField>
-                        <asp:BoundField DataField="Account" HeaderText="Account" SortExpression="Account"></asp:BoundField>
-                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description"></asp:BoundField>
-                        <asp:BoundField DataField="Phones" HeaderText="Phones" SortExpression="Phones" ReadOnly="True"></asp:BoundField>
-                        <asp:BoundField DataField="CreatedPerson" HeaderText="CreatedPerson" SortExpression="CreatedPerson" />
-                        <asp:TemplateField HeaderText="Chức năng">
-                            <ItemTemplate>
-                                <div id="edit" data-toggle="modal" data-target="#addModal"
-                                    data-account="<%# Eval("Account") %>">
-                                    <asp:ImageButton ID="btnEdit" ImageUrl="~/Images/icon/icon-edit.png" runat="server" OnClick="btnEdit_Click" />
-                                </div>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="divBody" style="background-color: white">
+        <h1>Danh sách tài khoản</h1>
+        <hr />
 
-                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/Images/icon/icon-delete.png" ShowDeleteButton="True" />
-
-                    </Columns>
-                </asp:GridView>
-                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:BSGConnectionString %>'
-                    DeleteCommand="DeleteAccountByID" DeleteCommandType="StoredProcedure"
-                    SelectCommand="GetAllAccount" SelectCommandType="StoredProcedure">
-                    <DeleteParameters>
-                        <asp:Parameter Name="id" Type="Int32" />
-                    </DeleteParameters>
-                </asp:SqlDataSource>
-            </div>
+        <div class="divTable">
+            <input type="button" value="Thêm" class="btn btn-primary btn-default-bkav" data-toggle="modal" data-target="#addModal" />
+            <asp:UpdatePanel runat="server" ID="upAccount">
+                <ContentTemplate>
+                    <asp:GridView ID="dgvAccount" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1" CssClass="table table-bordered table-default table-bkav-w">
+                        <Columns>
+                            <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" Visible="False" />
+                            <asp:TemplateField HeaderText="Account" SortExpression="Account" HeaderStyle-BackColor="#1967b2" HeaderStyle-ForeColor="#ffffff">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Account") %>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#1967B2" ForeColor="White" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Description" SortExpression="Description" HeaderStyle-BackColor="#1967b2" HeaderStyle-ForeColor="#ffffff">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#1967B2" ForeColor="White" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Phones" SortExpression="Phones" HeaderStyle-BackColor="#1967b2" HeaderStyle-ForeColor="#ffffff">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Phones") %>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#1967B2" ForeColor="White" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="CreatedPerson" SortExpression="CreatedPerson" HeaderStyle-BackColor="#1967b2" HeaderStyle-ForeColor="#ffffff">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("CreatedPerson") %>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#1967B2" ForeColor="White" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Chức năng" ShowHeader="False" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <span data-toggle="modal" data-target="#editModal">
+                                        <asp:Image runat="server" ImageUrl="~/Images/icon/icon-edit.png" />
+                                    </span>
+                                    &nbsp;<span data-toggle="modal" data-target="#deleteModal"><asp:Image runat="server" ImageUrl="~/Images/icon/icon-delete.png"/></span>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#1967B2" ForeColor="White" />
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </ContentTemplate>
+                <Triggers></Triggers>
+            </asp:UpdatePanel>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                ConnectionString="<%$ ConnectionStrings:BSGConnectionString %>"
+                DeleteCommand="DeleteAccountByID"
+                InsertCommand="AddAccount"
+                SelectCommand="GetAllAccount"
+                UpdateCommand="UpdateAccount"
+                DeleteCommandType="StoredProcedure"
+                InsertCommandType="StoredProcedure"
+                SelectCommandType="StoredProcedure"
+                UpdateCommandType="StoredProcedure">
+                <DeleteParameters>
+                    <asp:Parameter Name="ID" Type="Int32" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="Account" Type="String" />
+                    <asp:Parameter Name="Password" Type="String" />
+                    <asp:Parameter Name="Description" Type="String" />
+                    <asp:Parameter Name="CreatedPerson" Type="String" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="ID" Type="Int32" />
+                    <asp:Parameter Name="Account" Type="String" />
+                    <asp:Parameter Name="Password" Type="String" />
+                    <asp:Parameter Name="Description" Type="String" />
+                    <asp:Parameter Name="CreatedPerson" Type="String" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
         </div>
     </div>
+    <%--AddModal start--%>
     <div class="modal fade" tabindex="-1" id="addModal"
         data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
-                        &times;
-                    </button>
+                        &times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <asp:TextBox Visible="true" ID="isAdd" runat="server" />
                         <div class="form-group">
-                            <label for="txtAccont" class="col-sm-4 control-label">Account</label>
+                            <label for="txtAddAccount" class="col-sm-4 control-label">Account</label>
                             <div class="col-sm-8">
-                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtAccount" placeholder="Nhập tên đăng nhập" />
-                                <asp:RequiredFieldValidator ForeColor="Red" ErrorMessage="Tên đăng nhập không được để trống" ControlToValidate="txtAccount" runat="server" />
-                                <asp:CustomValidator OnServerValidate="txtAccount_ServerValidate" ErrorMessage="Tên đăng nhập không được quá 20 ký tự." ControlToValidate="txtAccount" runat="server" />
+                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtAddAccount" placeholder="Nhập tên đăng nhập" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="txtPassword" class="col-sm-4 control-label">Password</label>
+                            <label for="txtAddPassword" class="col-sm-4 control-label">Password</label>
                             <div class="col-sm-8">
-                                <asp:TextBox runat="server" TextMode="Password" Width="100%" CssClass="form-control" ID="txtPassword" placeholder="Nhập mật khẩu" />
-                                <asp:RequiredFieldValidator ErrorMessage="Mật khẩu không được để trống" ControlToValidate="txtPassword" runat="server" />
-                                <asp:CustomValidator OnServerValidate="txtPassword_ServerValidate" ErrorMessage="Mật khẩu không được quá 10 ký tự." ControlToValidate="txtPassword" runat="server" />
+                                <asp:TextBox runat="server" TextMode="Password" Width="100%" CssClass="form-control" ID="txtAddPassword" placeholder="Nhập mật khẩu" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="txtDescription" class="col-sm-4 control-label">Mô tả</label>
+                            <label for="txtAddDescription" class="col-sm-4 control-label">Mô tả</label>
                             <div class="col-sm-8">
-                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtDescription" placeholder="Nhập mô tả" />
+                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtAddDescription" placeholder="Nhập mô tả" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="txtPhones" class="col-sm-4 control-label">Số điện thoại</label>
+                            <label for="txtAddPhones" class="col-sm-4 control-label">Số điện thoại</label>
                             <div class="col-sm-8">
-                                <asp:TextBox runat="server" CssClass="form-control" Width="100%" TextMode="MultiLine" Rows="7" ID="txtPhones" placeholder="Nhập số điện thoại, mỗi dòng một số điện thoại." />
-                                <asp:CustomValidator OnServerValidate="txtPhones_ServerValidate" ErrorMessage="Số điện thoại không được nhập quá 16 ký tự." ControlToValidate="txtPhones" runat="server" />
+                                <asp:TextBox runat="server" CssClass="form-control" Width="100%" TextMode="MultiLine" Rows="7" ID="txtAddPhones" placeholder="Nhập số điện thoại, mỗi dòng một số điện thoại." />
                             </div>
                         </div>
+                        <asp:Label ID="lblAddValidate" runat="server" />
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button CssClass="btn btn-primary" Text="Cập nhật" ID="Add" OnClick="Add_Click" runat="server" />
+                    <asp:Button CssClass="btn btn-primary" Text="Cập nhật" ID="btnAddAccount" OnClick="btnAddAccount_Click" runat="server" />
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Bỏ qua</button>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        $('#addModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('account') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var insert = button.data('insert')
-            var modal = $(this)
-            modal.find('.modal-body  #MainContent_isAdd').val(insert)
-            modal.find('.modal-body  #MainContent_txtAccount').val(recipient)
-
-        })
-
-
-    </script>
+    <%--AddModal end--%>
+    <%--Edit start--%>
+    <div class="modal fade" tabindex="-1" id="editModal"
+        data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Modal Edit Account
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txtEditAccount" class="col-sm-4 control-label">Account</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtEditAccount" placeholder="Nhập tên đăng nhập" />
+                                <asp:Label ID="lblEditAccount" Text="" runat="server" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEditPassword" class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" TextMode="Password" Width="100%" CssClass="form-control" ID="txtEditPassword" placeholder="Nhập mật khẩu" />
+                                <asp:Label ID="lblEditPassword" Text="" runat="server" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEditDescription" class="col-sm-4 control-label">Mô tả</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" Width="100%" CssClass="form-control" ID="txtEditDescription" placeholder="Nhập mô tả" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEditPhones" class="col-sm-4 control-label">Số điện thoại</label>
+                            <div class="col-sm-8">
+                                <asp:TextBox runat="server" CssClass="form-control" Width="100%" TextMode="MultiLine" Rows="7" ID="txtEditPhones" placeholder="Nhập số điện thoại, mỗi dòng một số điện thoại." />
+                                <asp:Label ID="lblEditPhones" Text="" runat="server" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button CssClass="btn btn-primary" Text="Cập nhật" ID="btnEditAccount" OnClick="btnEditAccount_Click" runat="server" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Bỏ qua</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--EditModal end--%>
+    <%--DeleteModal start--%>
+    <div class="modal fade" tabindex="-1" id="deleteModal"
+        data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;</button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa Account?
+                </div>
+                <div class="modal-footer">
+                    <asp:Button CssClass="btn btn-primary" Text="Xác nhận" ID="btnDeleteAccount" OnClick="btnDeleteAccount_Click" runat="server" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Bỏ qua</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--DeleteModal end--%>
 </asp:Content>
